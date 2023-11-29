@@ -1,0 +1,52 @@
+<p>Fetching string array contents using NgFor directive</p>
+<ul>
+  <li *ngFor="let str of stringArray"> {{str}} </li>
+</ul>
+
+<button (click)="addNew()">Click me</button>
+
+<p>Fetching object array contents using NgFor directive</p>
+<ul>
+  <li *ngFor="let obj of objectArray ; let i = index"> <!-- By using this we can avoid using the line 26 in the file app.component.ts -->
+    {{i}}, {{obj.id}}, {{obj.postName}} 
+    <button (click)="onDelete(obj)">Delete</button>
+  </li>
+</ul>
+
+<p>Fetching Object Array</p>
+<button (click)="addNew()">Click me</button>
+<div *ngIf="stringTestArray.length > 0 else noData">
+  <ul>
+    <li *ngFor="let str of stringTestArray"> 
+      {{str}} 
+      <button (click)="onDelete(str)">Delete</button>
+    </li>
+  </ul>  
+</div>
+
+<ng-template #noData>
+  <p>There are no data to fetch...</p>
+</ng-template>
+
+
+<p>NgSwitch Case</p>
+
+<div>
+  <button (click)="onClick('step 1')">Step 1</button>
+  <button (click)="onClick('step 2')">Step 2</button>
+  <button (click)="onClick('step 3')">Step 3</button>
+</div>
+
+<div [ngSwitch]="stepForm">
+  <div *ngSwitchCase="'step 1'">Step 1 Form</div>
+  <div *ngSwitchCase="'step 2'">Step 2 Form</div>
+  <div *ngSwitchCase="'step 3'">Step 3 Form</div>
+  <div *ngSwitchDefault>Something Else!</div>
+</div>
+
+<h1 [ngStyle] = "{
+  color: isActive ? 'red' : 'blue',
+  textTransform: isActive ? 'uppercase' : 'lowercase'
+}">
+  NgStyle directive
+</h1>
