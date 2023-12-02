@@ -1,0 +1,14 @@
+<div [class.hide]="parentsChoice.flag">
+    <h1 [style.color]="parentsChoice.orderId==2 ? 'red' : ''">
+        Choice #{{parentsChoice.orderId}} {{parentsChoice.orderDescription}}
+    </h1>
+    <p>{{parentsChoice.objectDetails | json}}</p>
+</div>
+
+<br>
+<br>
+
+<label for="item-input">Add an item:</label>
+<input type="text" #newItem>
+<br>
+<button type="button" (click)="addNewItem(newItem.value)">Add to parent's list</button>

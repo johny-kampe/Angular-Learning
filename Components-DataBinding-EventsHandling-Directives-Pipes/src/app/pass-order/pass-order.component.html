@@ -1,0 +1,11 @@
+<button (click)="giveOrder(1)">#1 Choice</button>
+
+<button (click)="giveOrder(2)">#2 Choice</button>
+
+<button (click)="giveOrder(3)">Clear Page</button>
+
+<app-receive-order [parentsChoice]="choice" (newItemEvent)="addItem($event)"></app-receive-order>
+
+<ul>
+    <li *ngFor="let item of items">{{item}}</li>
+</ul>

@@ -1,0 +1,43 @@
+# Node modules
+node_modules/
+
+# Compiled output
+dist/
+tmp/
+out-tsc/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Angular configuration files
+.angular-*
+.angular_cli
+
+# JetBrains IDE files
+.idea/
+
+# Visual Studio Code files
+.vscode/
+
+# Node.js debugging
+node/
+
+# Logs
+*.log
+
+# Dependency lock file
+yarn.lock
+
+# Environment variables
+.env
+
+# Compiled TypeScript
+*.js
+*.js.map
+
+# Compiled CSS
+*.css
+
+# Test generated files
+test.ts
