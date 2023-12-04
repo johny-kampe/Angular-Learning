@@ -3,8 +3,7 @@ import { Choice } from '../interfaces/choice';
 
 @Component({
   selector: 'app-pass-order',
-  templateUrl: './pass-order.component.html',
-  styleUrls: ['./pass-order.component.css']
+  templateUrl: './pass-order.component.html'
 })
 export class PassOrderComponent implements OnInit {
   choice: Choice;

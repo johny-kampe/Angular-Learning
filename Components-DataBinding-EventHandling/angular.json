@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Components-DataBinding-EventsHandling-Directives-Pipes": {
+    "Components-DataBinding-EventHandling": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -60,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "Components-DataBinding-EventsHandling-Directives-Pipes:build:production"
+              "browserTarget": "Components-DataBinding-EventHandling:build:production"
             },
             "development": {
-              "browserTarget": "Components-DataBinding-EventsHandling-Directives-Pipes:build:development"
+              "browserTarget": "Components-DataBinding-EventHandling:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -71,7 +71,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Components-DataBinding-EventsHandling-Directives-Pipes:build"
+            "browserTarget": "Components-DataBinding-EventHandling:build"
           }
         },
         "test": {

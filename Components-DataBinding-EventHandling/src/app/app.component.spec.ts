@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'Components-DataBinding-EventsHandling-Directives-Pipes'`, () => {
+  it(`should have as title 'Components-DataBinding-EventHandling'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('Components-DataBinding-EventsHandling-Directives-Pipes');
+    expect(app.title).toEqual('Components-DataBinding-EventHandling');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('Components-DataBinding-EventsHandling-Directives-Pipes app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('Components-DataBinding-EventHandling app is running!');
   });
 });

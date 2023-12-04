@@ -4,7 +4,7 @@ import { Choice } from '../interfaces/choice';
 @Component({
   selector: 'app-receive-order',
   templateUrl: './receive-order.component.html',
-  styleUrls: ['./receive-order.component.css']
+  styleUrls: ['receive-order.component.css']
 })
 export class ReceiveOrderComponent implements OnInit {
   @Input() parentsChoice:Choice; //information that it's going to be passed to the child
