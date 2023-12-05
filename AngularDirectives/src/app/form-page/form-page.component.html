@@ -1,0 +1,37 @@
+<div class="form-area">
+    <h1>User Details</h1>
+
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" formControlName="name">
+
+            <div *ngIf="myForm.get('name').hasError('required') && myForm.get('name').touched">
+                Name is required.
+            </div>
+        </div>
+        
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" formControlName="email">
+
+            <div *ngIf="myForm.get('email').hasError('required') && myForm.get('email').touched">
+                Email is required.
+            </div>
+            <div *ngIf="myForm.get('email').hasError('email') && myForm.get('email').touched">
+                Invalid email format.
+            </div>
+        </div>
+        
+        <div>
+            <label for="message">Message:</label>
+            <textarea id="message" formControlName="message"></textarea>
+
+            <div *ngIf="myForm.get('message').hasError('required') && myForm.get('message').touched">
+                Message is required.
+            </div>
+        </div>
+        
+        <button type="submit" [disabled]="myForm.invalid">Submit</button>
+    </form>
+</div>

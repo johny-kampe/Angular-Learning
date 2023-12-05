@@ -40,19 +40,3 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
-
-# Angular configuration files
-.angular-*
-.angular_cli
-
-# Visual Studio Code files
-.vscode/
-
-# Node.js debugging
-node/
-
-# Logs
-*.log
-
-# Environment variables
-.env

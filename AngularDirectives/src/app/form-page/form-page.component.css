@@ -1,0 +1,16 @@
+.form-area{
+    text-align: center;
+    margin-top: 50px;
+}
+
+input{
+    margin-top: 20px;
+}
+
+textarea{
+    margin-top: 20px;
+}
+
+button{
+    margin-top: 15px;
+}
