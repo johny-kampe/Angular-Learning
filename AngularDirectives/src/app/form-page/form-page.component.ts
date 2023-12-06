@@ -8,12 +8,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class FormPageComponent implements OnInit{
   myForm: FormGroup;
+  userArray: Array<any> = [];
 
   ngOnInit(): void {
     this.myForm = this.formBuilder.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      message: ['', Validators.required]
+      address: ['', Validators.required]
     });
   }
   
@@ -22,10 +23,17 @@ export class FormPageComponent implements OnInit{
   
   onSubmit() {
     if (this.myForm.valid) {
-      console.log(this.myForm.value);
-      this.myForm.reset();
+      this.userArray.push({
+        "name": this.myForm.value.name,
+        "email": this.myForm.value.email,
+        "address": this.myForm.value.address
+      })
     } else {
       console.log('Form is invalid');
     }
+  }
+
+  onDelete(index){
+    this.userArray.splice(index,1)
   }
 }

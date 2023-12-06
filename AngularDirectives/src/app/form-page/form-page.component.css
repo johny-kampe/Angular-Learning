@@ -3,6 +3,20 @@
     margin-top: 50px;
 }
 
+.table-area{
+    position: absolute;
+    left: 35%;
+    margin-top: 20px;
+}
+
+h4{
+    text-align: center;
+}
+
+th{
+    padding: 0px 25px;
+}
+
 input{
     margin-top: 20px;
 }
