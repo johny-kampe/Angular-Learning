@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgForm, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
+import { NgForm, FormControl, FormGroup, Validators, FormArray, FormBuilder, Form } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -13,22 +13,20 @@ export class AppComponent {
   emailRegex: string = '[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$'
   contactRegex: string = '[789][0-9]{9}'
 
-  constructor(){
-    this.form = new FormGroup({
-      fullName: new FormControl('', [
+  constructor(fb: FormBuilder){
+    this.form = fb.group({
+      fullName: ['', [
         Validators.required,
         Validators.minLength(5)
-      ]),
-      email: new FormControl('', [
+      ]],
+      email: ['', [
         Validators.required,
         Validators.pattern(this.emailRegex)
-      ]),
+      ]],
 
-      contactDetails: new FormGroup({
-        address: new FormControl('', [
-          Validators.required
-        ]),
-        shippingAddress: new FormControl('', Validators.required),
+      contactDetails: fb.group({
+        address: ['', Validators.required],
+        shippingAddress: ['', Validators.required],
         contactNo: new FormControl('', [
           Validators.required,
           Validators.pattern(this.contactRegex)
@@ -63,13 +61,14 @@ export class AppComponent {
     return this.form.get('skills') as FormArray;
   }
 
-  addSkills(skills: HTMLInputElement){
-    this.getSkills.push(
-      new FormControl(skills.value)
-    )
+  addSkills(skill: String){
+    console.log(skill);
+    
+    this.getSkills.push(skill)
 
     console.log(this.form.value);
   }
+
   onSubmit(){
     console.log(this.form.value);
     

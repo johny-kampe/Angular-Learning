@@ -85,7 +85,7 @@
 
       <div class="form-group">
         <label for="">Skills</label>
-        <input type="text" class="form-control" #skill (keyup.enter)="addSkills(skill)">
+        <input type="text" class="form-control" #skill (keyup.enter)="addSkills(skill.value)">
 
         <!-- <ul class="list-group">
           <li class="list-group-item" *ngFor="let skill of getSkills.controls">
