@@ -7,13 +7,31 @@ import { Category } from '../models/category';
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.css']
 })
+
 export class CategoriesComponent implements OnInit {
+
+  categoryArray: Array<object> = []
+  formCategory: string = ''
+  formStatus: string = 'Add'
+  categoryId: string = ''
+
   constructor( private categoryService: CategoriesService) { }
 
   ngOnInit(): void {
     this.categoryService.loadData().subscribe(val => {
-      console.log(val);
+      this.categoryArray = val.map(item => {
+        let itemData = item.data
+        let categoryData: string [] = []
+
+        for (let key in itemData) //With the iteration we can get the internal objects of the array
+        {
+          let data: string = JSON.stringify(itemData[key])
+          categoryData.push(data.replace(/"/g, ''));
+        }
+        return categoryData
+      })
     })
+  
   }
 
   onSubmit(formData: any){
@@ -21,7 +39,14 @@ export class CategoriesComponent implements OnInit {
       category: formData.value.category
     }
 
-    this.categoryService.saveData(categoryData)
+    if(this.formStatus == 'Add'){
+      this.categoryService.saveData(categoryData)
+      formData.reset()
+    } else if(this.formStatus == 'Edit'){
+      this.categoryService.updateData(this.categoryId, categoryData.category)
+      formData.reset()
+      this.formStatus = 'Add'
+    }
 
     // this.afs.collection('categories').add(categoryData).then(docRef => {
     //   console.log(docRef);
@@ -48,5 +73,14 @@ export class CategoriesComponent implements OnInit {
     //   console.log(err);
     // })
 
+  }
+
+  onEdit(category: Array<object>){
+    this.formCategory = JSON.stringify(category)
+    this.formStatus = 'Edit'
+  }
+
+  onDelete(id: string){
+    this.categoryService.deleteData(id)
   }
 }

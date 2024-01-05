@@ -23,12 +23,24 @@ export class CategoriesService {
     return this.afs.collection('categories').snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
-          const data = a.payload.doc.data();
+          const data = a.payload.doc.data() as Array<object>;
           const id = a.payload.doc.id;
 
-          return {data, id};
+          return {id, data};
         })
       })
     )
+  }
+
+  updateData(id: string, editData: string){
+    this.afs.collection('categories').doc(id).update(editData).then(docRef => {
+      this.toastr.success('Data Updated Successfully ..!')
+    })
+  }
+
+  deleteData(id: string){
+    this.afs.collection('categories').doc(id).delete().then(docRef => {
+      this.toastr.success('Data Deleted Successfully ..!')
+    })
   }
 }
