@@ -12,12 +12,14 @@ import { PostsService } from 'src/app/services/posts.service';
   styleUrls: ['./new-post.component.css']
 })
 export class NewPostComponent implements OnInit {
-  permalink: string = ''
-  imgSrc: any = './assets/placeholder-default.jpg'
-  selectedImg: any
+  permalink: string = '';
+  imgSrc: any = './assets/placeholder-default.jpg';
+  selectedImg: any;
 
-  categories: Array<object> = []
+  categories: Array<object> = [];
   postForm: FormGroup;
+  post: any;
+  formStatus: string = 'Add New';
 
   constructor(
     private categoryService: CategoriesService, 
@@ -26,18 +28,21 @@ export class NewPostComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.route.queryParams.subscribe(val => {
-      console.log(val);
-      this.postService.loadOneData(val['id'])
-    })
+      // console.log(val);
+      this.postService.loadOneData(val['id']).subscribe(post => {
+        this.post = post
 
-      
-    this.postForm = this.fb.group({
-      title: ['', [Validators.required, Validators.minLength(10)]],
-      permalink: [{value: '', disabled: true}, Validators.required],
-      excerpt: ['', [Validators.required, Validators.minLength(50)]],
-      // categoryName: ['', Validators.required],
-      postImg: ['', Validators.required],
-      content: ['', Validators.required],
+        this.postForm = this.fb.group({
+          title: [this.post.title, [Validators.required, Validators.minLength(10)]],
+          permalink: [{value: this.post.permalink, disabled: true}, Validators.required],
+          excerpt: [this.post.excerpt, [Validators.required, Validators.minLength(50)]],
+          // categoryName: [`${this.post.category.categoryId}-${this.post.category.category}`, Validators.required],
+          postImg: ['', Validators.required],
+          content: [this.post.content, Validators.required],
+        })    
+        this.imgSrc = this.post.postImgPath
+        this.formStatus = 'Edit'
+      })
     })
   }
 
@@ -99,7 +104,6 @@ export class NewPostComponent implements OnInit {
     }
 
     console.log(postData);
-    
 
     this.postService.uploadImage(this.selectedImg, postData)
     this.postForm.reset()

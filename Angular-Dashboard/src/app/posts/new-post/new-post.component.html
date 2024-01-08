@@ -1,8 +1,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12 text-center">
-            <h3 class="text-theme-primary"> Add New Post </h3>
-            <p class="mb-5"> You can add your new post here </p>
+            <h3 class="text-theme-primary"> {{formStatus}} Post </h3>
+            <p class="mb-5"> You can {{formStatus}} your new post here </p>
         </div>
     </div>
 
@@ -109,7 +109,7 @@
             </div>
 
             <div class="col-md-12 text-center mb-5 mt-5">
-                <button class="btn btn-info ng-theme" [disabled]="postForm.invalid">Save Post</button>
+                <button class="btn btn-info ng-theme" [disabled]="postForm.invalid">{{formStatus}} Post</button>
                 <button class="btn btn-warning ml-3" routerLink="/posts">Back To Posts</button>
             </div>
         </div>
