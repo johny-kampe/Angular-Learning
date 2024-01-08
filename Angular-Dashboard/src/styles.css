@@ -11,7 +11,7 @@
 
 body{
     font-family: 'Roboto', sans-serif;
-    font-size: 12px;
+    font-size: 14px;
     color: var(--body-text-color);
     display: contents;
 }
@@ -43,7 +43,6 @@ body{
 input[type = text], input[type = email]{
     height: 60px;
     padding-left: 20px;
-    font-size: 13px;
     width: 100%;
 }
 
