@@ -10,14 +10,17 @@
                         <p> Please login to your admin account to post a new blog post </p>
                     </div>
 
-                    <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Email">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Password">
-                    </div>
-                    <button class="btn btn-info btn-block btn-theme"> Login </button>
+                    <form #loginForm = ngForm>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Email" name="email" ngModel>
+                        </div>
 
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Password" name="password" ngModel>
+                        </div>
+
+                        <button class="btn btn-info btn-block btn-theme"> Login </button>
+                    </form>
                 </div>
             </div>
         </div>
