@@ -16,7 +16,7 @@ export class PostsService {
     private toastr: ToastrService,
     private router: Router) { }
 
-  uploadImage(selectedImage, postData){
+  uploadImage(selectedImage, postData, formStatus, id){
     const filePath = `postIMG/${Date.now()}`
     console.log(filePath);
 
@@ -27,7 +27,11 @@ export class PostsService {
         postData.postImgPath = url
         console.log(postData);
 
-        this.saveData(postData)
+        if(formStatus == 'Edit'){
+          this.updateData(id, postData)
+        } else {
+          this.saveData(postData)
+        }
       })
     })
   }
@@ -54,5 +58,30 @@ export class PostsService {
 
   loadOneData(id){
     return this.afs.doc(`posts/${id}`).valueChanges()
+  }
+
+  updateData(id, postData){
+    this.afs.doc(`posts/${id}`).update(postData).then(() => {
+      this.toastr.success('Data updated successfulluy')
+      this.router.navigate(['/posts'])
+    })
+  }
+
+  deleteImage(postImgPath, id){
+    this.storage.storage.refFromURL(postImgPath).delete().then(() => {
+      this.deleteData(id)
+    })
+  }
+
+  deleteData(id){
+    this.afs.doc(`posts/${id}`).delete().then(() => {
+      this.toastr.warning('Data deleted ..!')
+    })
+  }
+
+  markFeatured(id, featuredData){
+    this.afs.doc(`posts/${id}`).update(featuredData).then(() => {
+      this.toastr.info('Featured status updated ..!')
+    })
   }
 }

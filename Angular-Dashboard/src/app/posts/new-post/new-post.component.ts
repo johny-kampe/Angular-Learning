@@ -20,6 +20,7 @@ export class NewPostComponent implements OnInit {
   postForm: FormGroup;
   post: any;
   formStatus: string = 'Add New';
+  docId: string
 
   constructor(
     private categoryService: CategoriesService, 
@@ -29,20 +30,33 @@ export class NewPostComponent implements OnInit {
   ) {
     this.route.queryParams.subscribe(val => {
       // console.log(val);
-      this.postService.loadOneData(val['id']).subscribe(post => {
-        this.post = post
+      this.docId = val['id']
 
+      if(this.docId){
+        this.postService.loadOneData(val['id']).subscribe(post => {
+          this.post = post
+  
+          this.postForm = this.fb.group({
+            title: [this.post.title, [Validators.required, Validators.minLength(10)]],
+            permalink: [{value: this.post.permalink, disabled: true}, Validators.required],
+            excerpt: [this.post.excerpt, [Validators.required, Validators.minLength(50)]],
+            // categoryName: [`${this.post.category.categoryId}-${this.post.category.category}`, Validators.required],
+            postImg: ['', Validators.required],
+            content: [this.post.content, Validators.required],
+          })    
+          this.imgSrc = this.post.postImgPath
+          this.formStatus = 'Edit'
+        })
+      } else {
         this.postForm = this.fb.group({
-          title: [this.post.title, [Validators.required, Validators.minLength(10)]],
-          permalink: [{value: this.post.permalink, disabled: true}, Validators.required],
-          excerpt: [this.post.excerpt, [Validators.required, Validators.minLength(50)]],
+          title: ['', [Validators.required, Validators.minLength(10)]],
+          permalink: [{value: '', disabled: true}, Validators.required],
+          excerpt: ['', [Validators.required, Validators.minLength(50)]],
           // categoryName: [`${this.post.category.categoryId}-${this.post.category.category}`, Validators.required],
           postImg: ['', Validators.required],
-          content: [this.post.content, Validators.required],
+          content: ['', Validators.required],
         })    
-        this.imgSrc = this.post.postImgPath
-        this.formStatus = 'Edit'
-      })
+      }
     })
   }
 
@@ -105,7 +119,7 @@ export class NewPostComponent implements OnInit {
 
     console.log(postData);
 
-    this.postService.uploadImage(this.selectedImg, postData)
+    this.postService.uploadImage(this.selectedImg, postData, this.formStatus, this.docId)
     this.postForm.reset()
     this.imgSrc = './assets/placeholder-default.jpg'
   }
